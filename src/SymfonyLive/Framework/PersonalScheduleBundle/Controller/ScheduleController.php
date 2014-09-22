@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use SymfonyLive\Conference\Conference;
+use SymfonyLive\Talk\Talk;
 
 class ScheduleController extends Controller
 {
@@ -28,6 +29,13 @@ class ScheduleController extends Controller
      */
     public function chooseTalkAction(Request $request, $conferenceName, $talkName)
     {
+        $conference = $this->getConferenceByNameOr404(urldecode($conferenceName));
+        $mySchedule = $this->getConferenceSchedule($conference);
+        $talk = Talk::named(urldecode($talkName));
+
+        $mySchedule->chooseTalk($talk);
+        $this->get('doctrine.orm.entity_manager')->flush();
+
         return $this->redirect($request->headers->get('referer'));
     }
 
@@ -44,7 +52,6 @@ class ScheduleController extends Controller
 
     private function getConferenceSchedule(Conference $conference)
     {
-        return $this->get('symfony_live.personal_schedule_repository')
-            ->findOrCreateConferenceSchedule($conference);
+        return $this->get('symfony_live.schedule_repository')->findOrCreateConferenceSchedule($conference);
     }
 }
