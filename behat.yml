@@ -3,3 +3,12 @@ default:
         attendee:
             contexts: [ AttendeeContext ]
             filters:  { role: conference attendee }
+        online_attendee:
+            contexts: [ OnlineAttendeeContext ]
+            filters:  { role: conference attendee, tags: critical }
+    extensions:
+        Behat\Symfony2Extension: ~
+        Behat\MinkExtension:
+            default_session: 'symfony2'
+            sessions:
+                symfony2: { symfony2: ~ }

@@ -97,3 +97,22 @@ Replace your `composer.json` with the next block and then run `composer update`:
     }
 }
 ```
+
+## 3. Configure online attendee behat suite by replacing `behat.yml` and running `behat --init`
+
+```yml
+default:
+    suites:
+        attendee:
+            contexts: [ AttendeeContext ]
+            filters:  { role: conference attendee }
+        online_attendee:
+            contexts: [ OnlineAttendeeContext ]
+            filters:  { role: conference attendee, tags: critical }
+    extensions:
+        Behat\Symfony2Extension: ~
+        Behat\MinkExtension:
+            default_session: 'symfony2'
+            sessions:
+                symfony2: { symfony2: ~ }
+```
