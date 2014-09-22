@@ -6,14 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class DefaultController extends Controller
+class ScheduleController extends Controller
 {
     /**
-     * @Route("/hello/{name}")
+     * @Route("/conferences/{name}")
      * @Template()
      */
-    public function indexAction($name)
+    public function conferenceAction($name)
     {
-        return array('name' => $name);
+        return [];
     }
 }
