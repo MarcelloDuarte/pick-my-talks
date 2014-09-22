@@ -3,19 +3,22 @@
 namespace SymfonyLive\Attendee;
 
 use Countable;
+use Doctrine\Common\Collections\ArrayCollection;
+use IteratorAggregate;
 use SymfonyLive\Conference\Conference;
 use SymfonyLive\Conference\Slot;
 use SymfonyLive\Talk\Talk;
 
-class PersonalSchedule implements Countable
+class PersonalSchedule implements Countable, IteratorAggregate
 {
     private $conference;
-    private $talkSchedules = [];
+    private $talkSchedules;
 
     public static function ofConference(Conference $conference)
     {
         $personalSchedule = new PersonalSchedule();
         $personalSchedule->conference = $conference;
+        $personalSchedule->talkSchedules = new ArrayCollection();
 
         return $personalSchedule;
     }
@@ -47,5 +50,10 @@ class PersonalSchedule implements Countable
         }
 
         return false;
+    }
+
+    public function getIterator()
+    {
+        return $this->talkSchedules;
     }
 }

@@ -3,6 +3,7 @@
 namespace spec\SymfonyLive\Attendee;
 
 use Countable;
+use IteratorAggregate;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SymfonyLive\Attendee\SlotIsAlreadyTakenException;
@@ -28,6 +29,11 @@ class PersonalScheduleSpec extends ObjectBehavior
         );
 
         $this->beConstructedThrough('ofConference', [$conference]);
+    }
+
+    function it_is_iterator_aggregate()
+    {
+        $this->shouldHaveType(IteratorAggregate::class);
     }
 
     function it_is_countable()
@@ -63,5 +69,13 @@ class PersonalScheduleSpec extends ObjectBehavior
         $this->chooseTalk(Talk::named('BDD by Example'));
 
         $this->count()->shouldReturn(1);
+    }
+
+    function it_allows_to_iterate_over_scheduled_talks()
+    {
+        $this->chooseTalk(Talk::named('BDD by Example'));
+
+        $iterator = $this->getIterator();
+        $iterator->shouldHaveCount(1);
     }
 }
