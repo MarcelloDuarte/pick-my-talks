@@ -2,7 +2,6 @@
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
-use Behat\Behat\Tester\Exception\PendingException;
 use SymfonyLive\Attendee\PersonalSchedule;
 use SymfonyLive\Conference\Conference;
 use SymfonyLive\Conference\Slot;
@@ -81,10 +80,10 @@ class AttendeeContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Then the chosen talk for :arg1 slot should be the :arg2
+     * @Then the chosen talk for :slot slot should be the :talk
      */
-    public function theChosenTalkForSlotShouldBeThe($arg1, $arg2)
+    public function theChosenTalkForSlotShouldBeThe(Slot $slot, Talk $talk)
     {
-        throw new PendingException();
+        assert::assertTrue($this->personalSchedule->hasChosenTalkForSlot($talk, $slot));
     }
 }
