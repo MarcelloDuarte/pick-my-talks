@@ -1,0 +1,5 @@
+default:
+    suites:
+        attendee:
+            contexts: [ AttendeeContext ]
+            filters:  { role: conference attendee }
