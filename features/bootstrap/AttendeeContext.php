@@ -47,7 +47,7 @@ class AttendeeContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Given a conference named :name with :count track
+     * @Given a conference named :name with :count track(s)
      */
     public function aConferenceNamedWithTrack($name, $count)
     {
