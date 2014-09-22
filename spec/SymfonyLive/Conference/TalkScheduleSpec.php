@@ -45,4 +45,9 @@ class TalkScheduleSpec extends ObjectBehavior
 
         $this->shouldHaveSameSlotAs($anotherSchedule);
     }
+
+    function it_exposes_talk()
+    {
+        $this->getTalk()->shouldBeLike(Talk::named('BDD by Example'));
+    }
 }

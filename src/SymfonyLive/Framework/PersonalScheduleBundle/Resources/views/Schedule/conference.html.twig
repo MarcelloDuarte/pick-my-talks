@@ -4,6 +4,11 @@
     {% for talkSchedule in conference %}
         <li class="talk">
             {{ talkSchedule }}
+
+            <a href="{{ path('choose_talk', {conferenceName: conference.name,
+            talkName: talkSchedule.talk}) }}">
+                Add to my schedule
+            </a>
         </li>
     {% endfor %}
 </ul>

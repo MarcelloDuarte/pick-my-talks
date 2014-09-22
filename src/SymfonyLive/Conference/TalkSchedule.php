@@ -34,6 +34,11 @@ class TalkSchedule
         return $this->slot == $anotherSchedule->slot;
     }
 
+    public function getTalk()
+    {
+        return Talk::named($this->talk);
+    }
+
     public function __toString()
     {
         return sprintf('%s %s', $this->talk, $this->slot);
