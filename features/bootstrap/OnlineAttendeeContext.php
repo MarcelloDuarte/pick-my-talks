@@ -3,17 +3,18 @@
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
+use SymfonyLive\Conference\Conference;
 
 class OnlineAttendeeContext implements Context, SnippetAcceptingContext
 {
     use AttendeeDictionary;
 
     /**
-     * @Given a conference named :arg1 with :arg2 track
+     * @Given a conference named :name with :count track(s)
      */
-    public function aConferenceNamedWithTrack($arg1, $arg2)
+    public function aConferenceNamedWithTrack($name, $count)
     {
-        throw new PendingException();
+        $aConference = Conference::namedWithTracks($name, $count);
     }
 
     /**
