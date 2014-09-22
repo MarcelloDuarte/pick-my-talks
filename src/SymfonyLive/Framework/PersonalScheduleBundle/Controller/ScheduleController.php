@@ -14,6 +14,7 @@ class ScheduleController extends Controller
      */
     public function conferenceAction($name)
     {
+        $name = urldecode($name);
         $conference = $this->get('symfony_live.conference_repository')->findConference($name);
 
         if (!$conference) {
