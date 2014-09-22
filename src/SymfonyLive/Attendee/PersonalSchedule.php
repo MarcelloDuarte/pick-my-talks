@@ -22,7 +22,15 @@ class PersonalSchedule implements Countable
 
     public function chooseTalk(Talk $talk)
     {
-        $this->talkSchedules[] = $this->conference->getTalkSchedule($talk);
+        $schedule = $this->conference->getTalkSchedule($talk);
+
+        foreach ($this->talkSchedules as $chosenSchedule) {
+            if ($chosenSchedule->hasSameSlotAs($schedule)) {
+                throw new SlotIsAlreadyTakenException;
+            }
+        }
+
+        $this->talkSchedules[] = $schedule;
     }
 
     public function count()
@@ -32,8 +40,8 @@ class PersonalSchedule implements Countable
 
     public function hasChosenTalkForSlot(Talk $talk, Slot $slot)
     {
-        foreach ($this->talkSchedules as $talkSchedule) {
-            if ($talkSchedule->isForTalk($talk) && $talkSchedule->isScheduledFor($slot)) {
+        foreach ($this->talkSchedules as $chosenSchedule) {
+            if ($chosenSchedule->isForTalk($talk) && $chosenSchedule->isScheduledFor($slot)) {
                 return true;
             }
         }

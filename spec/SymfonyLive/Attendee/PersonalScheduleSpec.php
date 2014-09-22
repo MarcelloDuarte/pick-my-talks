@@ -5,6 +5,7 @@ namespace spec\SymfonyLive\Attendee;
 use Countable;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use SymfonyLive\Attendee\SlotIsAlreadyTakenException;
 use SymfonyLive\Conference\Conference;
 use SymfonyLive\Conference\Slot;
 use SymfonyLive\Conference\Track;
@@ -41,6 +42,15 @@ class PersonalScheduleSpec extends ObjectBehavior
         $this->chooseTalk($theTalk);
 
         $this->shouldHaveChosenTalkForSlot($theTalk, Slot::fromString('09:00-09:45'));
+    }
+
+    function it_does_not_allow_to_choose_a_talk_for_already_taken_slot()
+    {
+        $this->chooseTalk(Talk::named('BDD by Example'));
+
+        $this->shouldThrow(SlotIsAlreadyTakenException::class)->duringChooseTalk(
+            Talk::named('Advanced Symfony')
+        );
     }
 
     function it_has_zero_count_from_the_start()

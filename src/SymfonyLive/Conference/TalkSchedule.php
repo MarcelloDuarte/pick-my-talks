@@ -28,4 +28,9 @@ class TalkSchedule
     {
         return $this->slot == $slot;
     }
+
+    public function hasSameSlotAs(TalkSchedule $anotherSchedule)
+    {
+        return $this->slot == $anotherSchedule->slot;
+    }
 }
