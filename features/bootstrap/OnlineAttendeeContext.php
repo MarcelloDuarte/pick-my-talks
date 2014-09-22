@@ -1,6 +1,5 @@
 <?php
 
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\MinkExtension\Context\RawMinkContext;
@@ -79,10 +78,10 @@ class OnlineAttendeeContext extends RawMinkContext implements Context, SnippetAc
     }
 
     /**
-     * @Then the chosen talk for :arg1 slot should be the :arg2
+     * @Then the chosen talk for :time slot should be the :name
      */
-    public function theChosenTalkForSlotShouldBeThe($arg1, $arg2)
+    public function theChosenTalkForSlotShouldBeThe($time, $name)
     {
-        throw new PendingException();
+        $this->assertSession()->elementTextContains('css',  ".my-schedule .talk:contains('$name')",  $time);
     }
 }
