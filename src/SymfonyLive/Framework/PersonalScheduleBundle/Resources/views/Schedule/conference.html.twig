@@ -12,3 +12,13 @@
         </li>
     {% endfor %}
 </ul>
+
+<h2>My schedule</h2>
+
+<ul class="my-schedule">
+    {% for talkSchedule in mySchedule %}
+        <li class="talk">
+            {{ talkSchedule }}
+        </li>
+    {% endfor %}
+</ul>
