@@ -275,3 +275,38 @@ In `src/SymfonyLive/Framework/Doctrine/mapping/Conference.TalkSchedule.orm.xml`:
     </entity>
 </doctrine-mapping>
 ```
+
+## 10. Add mapping for personal schedule
+
+In `src/SymfonyLive/Framework/Doctrine/mapping/Attendee.PersonalSchedule.orm.xml`:
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="SymfonyLive\Attendee\PersonalSchedule"
+            repository-class="SymfonyLive\Framework\Doctrine\DoctrineScheduleRepository">
+        <id name="conference" association-key="true"/>
+
+        <many-to-one field="conference" target-entity="SymfonyLive\Conference\Conference">
+            <join-column name="conference" referenced-column-name="name"/>
+        </many-to-one>
+
+        <many-to-many field="talkSchedules" target-entity="SymfonyLive\Conference\TalkSchedule">
+            <join-table name="personal_talk_schedules">
+                <join-columns>
+                    <join-column name="conference" referenced-column-name="conference"/>
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="talk" referenced-column-name="talk" unique="true"/>
+                    <join-column name="slot" referenced-column-name="slot" unique="true"/>
+                    <join-column name="track" referenced-column-name="track" unique="true"/>
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+    </entity>
+</doctrine-mapping>
+```
