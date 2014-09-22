@@ -58,7 +58,13 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
+        auto_mapping: false
+        mappings:
+            symfony_live:
+                is_bundle: false
+                type:      xml
+                dir:       %kernel.root_dir%/../src/SymfonyLive/Framework/Doctrine/mapping
+                prefix:    SymfonyLive
 
 # Swiftmailer Configuration
 swiftmailer:

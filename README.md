@@ -187,3 +187,46 @@ class ExceptionRethrowListener
 
 </container>
 ```
+
+## 7. Replace the Doctrine mapping configuration in the `app/config/config.yml`:
+
+```yml
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   "%database_driver%"
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+        # if using pdo_sqlite as your database driver, add the path in parameters.yml
+        # e.g. database_path: "%kernel.root_dir%/data/data.db3"
+        # path:     "%database_path%"
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        auto_mapping: false
+        mappings:
+            symfony_live:
+                is_bundle: false
+                type:      xml
+                dir:       %kernel.root_dir%/../src/SymfonyLive/Framework/Doctrine/mapping
+                prefix:    SymfonyLive
+```
+
+## 8. Configure development database (sqlite) by adding next lines to `app/config/config_dev.yml`:
+
+```yml
+doctrine:
+    dbal:
+        driver:   pdo_sqlite
+        host:     127.0.0.1
+        port:     ~
+        dbname:   symfony
+        user:     root
+        password: ~
+        charset:  UTF8
+        path:     "%kernel.root_dir%/../data.db3"
+```

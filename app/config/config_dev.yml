@@ -34,3 +34,14 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+doctrine:
+    dbal:
+        driver:   pdo_sqlite
+        host:     127.0.0.1
+        port:     ~
+        dbname:   symfony
+        user:     root
+        password: ~
+        charset:  UTF8
+        path:     "%kernel.root_dir%/../data.db3"
