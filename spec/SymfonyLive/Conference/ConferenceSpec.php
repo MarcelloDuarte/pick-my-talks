@@ -28,4 +28,9 @@ class ConferenceSpec extends ObjectBehavior
             new TalkSchedule($this->getWrappedObject(), $talk, $slot, $track)
         );
     }
+
+    function it_has_a_name()
+    {
+        $this->getName()->shouldReturn('Symfony Live 2014');
+    }
 }
