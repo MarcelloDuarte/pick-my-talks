@@ -8,10 +8,12 @@ use SymfonyLive\Conference\Conference;
 use SymfonyLive\Conference\Slot;
 use SymfonyLive\Conference\Track;
 use SymfonyLive\Talk\Talk;
+use PHPUnit_Framework_Assert as assert;
 
 class AttendeeContext implements Context, SnippetAcceptingContext
 {
     private $conference;
+    private $personalSchedule;
 
     /**
      * @Transform :count
@@ -66,16 +68,16 @@ class AttendeeContext implements Context, SnippetAcceptingContext
      */
     public function iChooseTheTalkForMyPersonalScheduleOfThisConference(Talk $talk)
     {
-        $myPersonalSchedule = PersonalSchedule::ofConference($this->conference);
-        $myPersonalSchedule->chooseTalk($talk);
+        $this->personalSchedule = PersonalSchedule::ofConference($this->conference);
+        $this->personalSchedule->chooseTalk($talk);
     }
 
     /**
-     * @Then my personal schedule for this conference should have :arg1 talk
+     * @Then my personal schedule for this conference should have :count talk
      */
-    public function myPersonalScheduleForThisConferenceShouldHaveTalk($arg1)
+    public function myPersonalScheduleForThisConferenceShouldHaveTalk($count)
     {
-        throw new PendingException();
+        assert::assertCount($count, $this->personalSchedule);
     }
 
     /**
