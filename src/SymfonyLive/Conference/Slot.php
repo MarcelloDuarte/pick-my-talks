@@ -13,4 +13,9 @@ class Slot
 
         return $slot;
     }
+
+    public function __toString()
+    {
+        return $this->string;
+    }
 }

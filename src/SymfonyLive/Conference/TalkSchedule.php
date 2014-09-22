@@ -14,9 +14,9 @@ class TalkSchedule
     public function __construct(Conference $conference, Talk $talk, Slot $slot, Track $track)
     {
         $this->conference = $conference;
-        $this->talk = $talk;
-        $this->slot = $slot;
-        $this->track = $track;
+        $this->talk = (string)$talk;
+        $this->slot = (string)$slot;
+        $this->track = (string)$track;
     }
 
     public function isForTalk(Talk $talk)

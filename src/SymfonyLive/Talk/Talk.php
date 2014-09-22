@@ -13,4 +13,9 @@ class Talk
 
         return $talk;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
