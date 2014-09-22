@@ -71,11 +71,11 @@ class OnlineAttendeeContext extends RawMinkContext implements Context, SnippetAc
     }
 
     /**
-     * @Then my personal schedule for this conference should have :arg1 talk
+     * @Then my personal schedule for this conference should have :count talk
      */
-    public function myPersonalScheduleForThisConferenceShouldHaveTalk($arg1)
+    public function myPersonalScheduleForThisConferenceShouldHaveTalk($count)
     {
-        throw new PendingException();
+        $this->assertSession()->elementsCount('css', '.my-schedule .talk', $count);
     }
 
     /**
