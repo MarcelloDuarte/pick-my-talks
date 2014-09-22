@@ -61,11 +61,12 @@ class AttendeeContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @When I choose the :arg1 talk for my personal schedule of this conference
+     * @When I choose the :talk talk for my personal schedule of this conference
      */
-    public function iChooseTheTalkForMyPersonalScheduleOfThisConference($arg1)
+    public function iChooseTheTalkForMyPersonalScheduleOfThisConference(Talk $talk)
     {
-        throw new PendingException();
+        $myPersonalSchedule = PersonalSchedule::ofConference($this->conference);
+        $myPersonalSchedule->chooseTalk($talk);
     }
 
     /**
