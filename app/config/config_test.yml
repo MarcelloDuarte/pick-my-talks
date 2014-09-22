@@ -14,3 +14,9 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+services:
+    listener.exception_rethrow:
+        class: SymfonyLive\Framework\Test\ExceptionRethrowListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }

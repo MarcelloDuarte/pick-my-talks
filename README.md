@@ -126,3 +126,40 @@ app/console generate:bundle \
     --bundle-name=PersonalScheduleBundle \
     --no-interaction
 ```
+
+## 5. Improve behat debugging in Symfony2
+
+Add to the end of `app/config/config_test.yml`:
+
+```yml
+services:
+    listener.exception_rethrow:
+        class: SymfonyLive\Framework\Test\ExceptionRethrowListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+```
+
+Create `src/SymfonyLive/Framework/Test/ExceptionRethrowListener.php`:
+
+```php
+<?php
+
+namespace SymfonyLive\Framework\Test;
+
+use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+
+class ExceptionRethrowListener
+{
+    public function onKernelException(GetResponseForExceptionEvent $event)
+    {
+        $exception = $event->getException();
+
+        if ($exception instanceof HttpExceptionInterface) {
+            return;
+        }
+
+        throw $exception;
+    }
+}
+```
