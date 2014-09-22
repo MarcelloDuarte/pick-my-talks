@@ -3,6 +3,7 @@
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use SymfonyLive\Attendee\PersonalSchedule;
+use SymfonyLive\Attendee\SlotIsAlreadyTakenException;
 use SymfonyLive\Conference\Conference;
 use SymfonyLive\Conference\Slot;
 use SymfonyLive\Conference\Track;
@@ -93,5 +94,13 @@ class AttendeeContext implements Context, SnippetAcceptingContext
     public function theChosenTalkForSlotShouldBeThe(Slot $slot, Talk $talk)
     {
         assert::assertTrue($this->personalSchedule->hasChosenTalkForSlot($talk, $slot));
+    }
+
+    /**
+     * @Then I should be notified that slot :slot is already taken by another talk
+     */
+    public function iShouldBeNotifiedThatSlotIsAlreadyTakenByAnotherTalk()
+    {
+        assert::assertInstanceOf(SlotIsAlreadyTakenException::class, $this->choiceException);
     }
 }
