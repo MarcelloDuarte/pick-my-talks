@@ -3,6 +3,7 @@
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Behat\Tester\Exception\PendingException;
+use SymfonyLive\Conference\Conference;
 
 class AttendeeContext implements Context, SnippetAcceptingContext
 {
