@@ -4,9 +4,14 @@ use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use SymfonyLive\Conference\Conference;
+use SymfonyLive\Conference\Slot;
+use SymfonyLive\Conference\Track;
+use SymfonyLive\Talk\Talk;
 
 class OnlineAttendeeContext implements Context, SnippetAcceptingContext
 {
+    private $conference;
+
     use AttendeeDictionary;
 
     /**
@@ -14,15 +19,15 @@ class OnlineAttendeeContext implements Context, SnippetAcceptingContext
      */
     public function aConferenceNamedWithTrack($name, $count)
     {
-        $aConference = Conference::namedWithTracks($name, $count);
+        $this->conference = Conference::namedWithTracks($name, $count);
     }
 
     /**
-     * @Given the :arg1 talk is scheduled for :arg2 slot on the conference track :arg3
+     * @Given the :talk talk is scheduled for :slot slot on the conference track :track
      */
-    public function theTalkIsScheduledForSlotOnTheConferenceTrack($arg1, $arg2, $arg3)
+    public function theTalkIsScheduledForSlotOnTheConferenceTrack(Talk $talk, Slot $slot, Track $track)
     {
-        throw new PendingException();
+        $this->conference->scheduleTalk($talk, $slot, $track);
     }
 
     /**
