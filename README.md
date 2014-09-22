@@ -116,3 +116,13 @@ default:
             sessions:
                 symfony2: { symfony2: ~ }
 ```
+
+## 4. Generate Symfony2 bundle
+
+```bash
+app/console generate:bundle \
+    --namespace=SymfonyLive/Framework/PersonalScheduleBundle \
+    --dir=src \
+    --bundle-name=PersonalScheduleBundle \
+    --no-interaction
+```

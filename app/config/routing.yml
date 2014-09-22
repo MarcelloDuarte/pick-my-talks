@@ -1,0 +1,5 @@
+personal_schedule:
+    resource: "@PersonalScheduleBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
