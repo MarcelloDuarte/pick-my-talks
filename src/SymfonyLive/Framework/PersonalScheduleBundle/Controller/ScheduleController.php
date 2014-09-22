@@ -16,6 +16,10 @@ class ScheduleController extends Controller
     {
         $conference = $this->get('symfony_live.conference_repository')->findConference($name);
 
+        if (!$conference) {
+            throw $this->createNotFoundException();
+        }
+
         return ['conference' => $conference];
     }
 }
