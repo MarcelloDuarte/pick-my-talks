@@ -2,11 +2,14 @@
 
 namespace SymfonyLive\Attendee;
 
+use Countable;
 use SymfonyLive\Conference\Conference;
 use SymfonyLive\Talk\Talk;
 
-class PersonalSchedule
+class PersonalSchedule implements Countable
 {
+    private $count = 0;
+
     public static function ofConference(Conference $conference)
     {
         $personalSchedule = new PersonalSchedule();
@@ -18,6 +21,11 @@ class PersonalSchedule
 
     public function chooseTalk(Talk $talk)
     {
-        // TODO: write logic here
+        $this->count++;
+    }
+
+    public function count()
+    {
+        return $this->count;
     }
 }
