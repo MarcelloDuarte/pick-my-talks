@@ -4,11 +4,12 @@ namespace SymfonyLive\Conference;
 
 class Slot
 {
+    private $string;
+
     public static function fromString($string)
     {
         $slot = new Slot();
-
-        // TODO: write logic here
+        $slot->string = $string;
 
         return $slot;
     }

@@ -4,11 +4,12 @@ namespace SymfonyLive\Talk;
 
 class Talk
 {
+    private $name;
+
     public static function named($name)
     {
         $talk = new Talk();
-
-        // TODO: write logic here
+        $talk->name = $name;
 
         return $talk;
     }

@@ -6,6 +6,8 @@ use SymfonyLive\Talk\Talk;
 
 class Conference
 {
+    private $talkSchedules = [];
+
     public static function namedWithTracks($name, $tracks)
     {
         $conference = new Conference();
@@ -17,6 +19,15 @@ class Conference
 
     public function scheduleTalk(Talk $talk, Slot $slot, Track $track)
     {
-        // TODO: write logic here
+        $this->talkSchedules[] = new TalkSchedule($this, $talk, $slot, $track);
+    }
+
+    public function getTalkSchedule(Talk $talk)
+    {
+        foreach ($this->talkSchedules as $talkSchedule) {
+            if ($talkSchedule->isForTalk($talk)) {
+                return $talkSchedule;
+            }
+        }
     }
 }
