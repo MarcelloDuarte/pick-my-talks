@@ -1,17 +1,25 @@
 <?php
 
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\Behat\Tester\Exception\PendingException;
 
 class AttendeeContext implements Context, SnippetAcceptingContext
 {
     /**
-     * @Given a conference named :arg1 with :arg2 track
+     * @Transform :count
      */
-    public function aConferenceNamedWithTrack($arg1, $arg2)
+    public function transformStringToCount($string)
     {
-        throw new PendingException();
+        return (int)$string;
+    }
+
+    /**
+     * @Given a conference named :name with :count track
+     */
+    public function aConferenceNamedWithTrack($name, $count)
+    {
+        $aConference = Conference::namedWithTracks($name, $count);
     }
 
     /**
