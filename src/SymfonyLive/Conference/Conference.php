@@ -2,17 +2,21 @@
 
 namespace SymfonyLive\Conference;
 
+use ArrayIterator;
+use Doctrine\Common\Collections\ArrayCollection;
+use IteratorAggregate;
 use SymfonyLive\Talk\Talk;
 
-class Conference
+class Conference implements IteratorAggregate
 {
     private $name;
-    private $talkSchedules = [];
+    private $talkSchedules;
 
     public static function namedWithTracks($name, $tracks)
     {
         $conference = new Conference();
         $conference->name = $name;
+        $conference->talkSchedules = new ArrayCollection();
 
         return $conference;
     }
@@ -34,5 +38,10 @@ class Conference
                 return $talkSchedule;
             }
         }
+    }
+
+    public function getIterator()
+    {
+        return $this->talkSchedules;
     }
 }
