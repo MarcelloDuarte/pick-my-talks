@@ -4,6 +4,9 @@ use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Behat\Tester\Exception\PendingException;
 use SymfonyLive\Conference\Conference;
+use SymfonyLive\Conference\Slot;
+use SymfonyLive\Conference\Track;
+use SymfonyLive\Talk\Talk;
 
 class AttendeeContext implements Context, SnippetAcceptingContext
 {
