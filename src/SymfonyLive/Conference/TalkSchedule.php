@@ -33,4 +33,9 @@ class TalkSchedule
     {
         return $this->slot == $anotherSchedule->slot;
     }
+
+    public function __toString()
+    {
+        return sprintf('%s %s', $this->talk, $this->slot);
+    }
 }
