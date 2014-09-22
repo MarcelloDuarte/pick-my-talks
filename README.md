@@ -163,3 +163,27 @@ class ExceptionRethrowListener
     }
 }
 ```
+
+## 6. Add the conference repository service definition to
+`src/SymfonyLive/Framework/PersonalScheduleBundle/Resources/config/services.xml`:
+
+```xml
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="symfony_live.conference_repository"
+                 class="SymfonyLive\Conference\ConferenceRepository"
+                 factory-service="doctrine.orm.entity_manager"
+                 factory-method="getRepository">
+            <argument>SymfonyLive\Conference\Conference</argument>
+        </service>
+
+    </services>
+
+</container>
+```
