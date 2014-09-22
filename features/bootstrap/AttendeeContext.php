@@ -13,6 +13,7 @@ class AttendeeContext implements Context, SnippetAcceptingContext
 {
     private $conference;
     private $personalSchedule;
+    private $choiceException;
 
     /**
      * @Transform :count
@@ -64,11 +65,18 @@ class AttendeeContext implements Context, SnippetAcceptingContext
 
     /**
      * @When I choose the :talk talk for my personal schedule of this conference
+     * @When I try to choose the :talk talk for my personal schedule of this conference
      */
     public function iChooseTheTalkForMyPersonalScheduleOfThisConference(Talk $talk)
     {
-        $this->personalSchedule = PersonalSchedule::ofConference($this->conference);
-        $this->personalSchedule->chooseTalk($talk);
+        $this->personalSchedule = $this->personalSchedule
+            ?: PersonalSchedule::ofConference($this->conference);
+
+        try {
+            $this->personalSchedule->chooseTalk($talk);
+        } catch (\Exception $e) {
+            $this->choiceException = $e;
+        }
     }
 
     /**
