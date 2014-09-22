@@ -230,3 +230,48 @@ doctrine:
         charset:  UTF8
         path:     "%kernel.root_dir%/../data.db3"
 ```
+
+## 9. Define Doctrine mapping for Conference and TalkSchedule:
+
+In `src/SymfonyLive/Framework/Doctrine/mapping/Conference.Conference.orm.xml`:
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="SymfonyLive\Conference\Conference"
+            repository-class="SymfonyLive\Framework\Doctrine\DoctrineConferenceRepository">
+        <id name="name" type="string"/>
+        <one-to-many field="talkSchedules"
+                     mapped-by="conference"
+                     target-entity="SymfonyLive\Conference\TalkSchedule">
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
+        </one-to-many>
+    </entity>
+</doctrine-mapping>
+```
+
+In `src/SymfonyLive/Framework/Doctrine/mapping/Conference.TalkSchedule.orm.xml`:
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="SymfonyLive\Conference\TalkSchedule">
+        <id name="conference" association-key="true"/>
+        <id name="talk" type="object"/>
+        <id name="slot" type="object"/>
+        <id name="track" type="object"/>
+        <many-to-one field="conference" target-entity="SymfonyLive\Conference\Conference">
+            <join-column name="conference" referenced-column-name="name"/>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>
+```

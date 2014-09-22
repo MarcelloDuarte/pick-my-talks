@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="SymfonyLive\Conference\TalkSchedule">
+        <id name="conference" association-key="true"/>
+        <id name="talk" type="string"/>
+        <id name="slot" type="string"/>
+        <id name="track" type="integer"/>
+        <many-to-one field="conference" target-entity="SymfonyLive\Conference\Conference">
+            <join-column name="conference" referenced-column-name="name"/>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

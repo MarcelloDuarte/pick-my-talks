@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="SymfonyLive\Conference\Conference"
+            repository-class="SymfonyLive\Framework\Doctrine\DoctrineConferenceRepository">
+        <id name="name" type="string"/>
+        <one-to-many field="talkSchedules"
+                     mapped-by="conference"
+                     target-entity="SymfonyLive\Conference\TalkSchedule">
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
+        </one-to-many>
+    </entity>
+</doctrine-mapping>
