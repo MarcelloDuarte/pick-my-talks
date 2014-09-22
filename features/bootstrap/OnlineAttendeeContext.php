@@ -4,16 +4,40 @@ use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\MinkExtension\Context\RawMinkContext;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Tools\SchemaTool;
 use SymfonyLive\Conference\Conference;
+use SymfonyLive\Conference\ConferenceRepository;
 use SymfonyLive\Conference\Slot;
 use SymfonyLive\Conference\Track;
 use SymfonyLive\Talk\Talk;
 
 class OnlineAttendeeContext extends RawMinkContext implements Context, SnippetAcceptingContext
 {
+    private $repository;
+    private $em;
     private $conference;
 
     use AttendeeDictionary;
+
+    public function __construct(ConferenceRepository $repository, EntityManager $em)
+    {
+        $this->repository = $repository;
+        $this->em = $em;
+    }
+
+    /**
+     * @BeforeScenario
+     */
+    public function cleanDatabase()
+    {
+        $metadata = $this->em->getMetadataFactory()->getAllMetadata();
+        if (!empty($metadata)) {
+            $tool = new SchemaTool($this->em);
+            $tool->dropSchema($metadata);
+            $tool->createSchema($metadata);
+        }
+    }
 
     /**
      * @Given a conference named :name with :count track(s)
@@ -21,6 +45,8 @@ class OnlineAttendeeContext extends RawMinkContext implements Context, SnippetAc
     public function aConferenceNamedWithTrack($name, $count)
     {
         $this->conference = Conference::namedWithTracks($name, $count);
+        $this->repository->saveConference($this->conference);
+        $this->em->flush();
     }
 
     /**
@@ -29,6 +55,7 @@ class OnlineAttendeeContext extends RawMinkContext implements Context, SnippetAc
     public function theTalkIsScheduledForSlotOnTheConferenceTrack(Talk $talk, Slot $slot, Track $track)
     {
         $this->conference->scheduleTalk($talk, $slot, $track);
+        $this->em->flush();
     }
 
     /**
