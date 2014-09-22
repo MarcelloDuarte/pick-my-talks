@@ -13,6 +13,13 @@
             <argument>SymfonyLive\Conference\Conference</argument>
         </service>
 
+        <service id="symfony_live.schedule_repository"
+                 class="SymfonyLive\Attendee\PersonalScheduleRepository"
+                 factory-service="doctrine.orm.entity_manager"
+                 factory-method="getRepository">
+            <argument>SymfonyLive\Attendee\PersonalSchedule</argument>
+        </service>
+
     </services>
 
 </container>
