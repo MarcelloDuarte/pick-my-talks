@@ -4,7 +4,10 @@ default:
             contexts: [ AttendeeContext ]
             filters:  { role: conference attendee }
         online_attendee:
-            contexts: [ OnlineAttendeeContext ]
+            contexts:
+                - OnlineAttendeeContext:
+                    repository: @symfony_live.conference_repository
+                    em:         @doctrine.orm.entity_manager
             filters:  { role: conference attendee, tags: critical }
     extensions:
         Behat\Symfony2Extension: ~
