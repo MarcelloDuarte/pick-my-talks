@@ -1,0 +1,5 @@
+vendor/
+cache/
+bootstrap.php.cache
+parameters.yml
+data.db3
