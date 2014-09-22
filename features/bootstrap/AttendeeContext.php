@@ -3,6 +3,7 @@
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Behat\Tester\Exception\PendingException;
+use SymfonyLive\Attendee\PersonalSchedule;
 use SymfonyLive\Conference\Conference;
 use SymfonyLive\Conference\Slot;
 use SymfonyLive\Conference\Track;
