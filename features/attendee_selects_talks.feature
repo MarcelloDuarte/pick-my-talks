@@ -3,6 +3,7 @@ Feature: Attendee selects talks
   As a conference attendee
   I want to plan my personal schedule beforehand
 
+  @critical
   Scenario: Successfully selecting 1 talk from the 1 track conference for a single slot
     Given a conference named "SymfonyLive 2014" with 1 track
     And the "Advanced Symfony" talk is scheduled for "10:30-11:30" slot on the conference track 1
