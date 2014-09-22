@@ -16,37 +16,7 @@ class AttendeeContext implements Context, SnippetAcceptingContext
     private $personalSchedule;
     private $choiceException;
 
-    /**
-     * @Transform :count
-     */
-    public function transformStringToCount($string)
-    {
-        return (int)$string;
-    }
-
-    /**
-     * @Transform :talk
-     */
-    public function transformStringToTalk($string)
-    {
-        return Talk::named($string);
-    }
-
-    /**
-     * @Transform :slot
-     */
-    public function transformStringToSlot($string)
-    {
-        return Slot::fromString($string);
-    }
-
-    /**
-     * @Transform :track
-     */
-    public function transformStringToTrack($string)
-    {
-        return Track::numbered((int)$string);
-    }
+    use AttendeeDictionary;
 
     /**
      * @Given a conference named :name with :count track(s)

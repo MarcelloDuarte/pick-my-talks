@@ -6,6 +6,7 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 
 class OnlineAttendeeContext implements Context, SnippetAcceptingContext
 {
+    use AttendeeDictionary;
 
     /**
      * @Given a conference named :arg1 with :arg2 track
