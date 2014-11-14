@@ -1,6 +1,6 @@
 # What is it?
 
-This is a demonstration of the simple project built using the BDD process we call **Modelling by Example**. You can learn more on the process by reading the [MbE introduction post]() by @everzet (its author) or viewing his [presentation from BDDX14](https://skillsmatter.com/skillscasts/5899-modelling-by-example).
+This is a demonstration of the simple project built using the BDD process we call **Modelling by Example**. You can learn more on the process by reading the [MbE introduction post](http://everzet.com/post/99045129766/introducing-modelling-by-example) by @everzet (the process author) or viewing his [presentation from BDDX14](https://skillsmatter.com/skillscasts/5899-modelling-by-example).
 
 ## How to use this repository?
 
